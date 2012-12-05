@@ -10,4 +10,7 @@ sockets. See http://insecure.org/stc/sti.html for the original copy of
 chunkssh.pl (you need to search for "chunkssh.pl", it's about halfway through 
 the page).
 
+It's possible to use other DPI methods to block SSH traffic xored with 0x19 --
+the easiest way to do so is to look at packet sizes. If you want more advanced
+obfuscation, just use Tor's obfsproxy: https://gitweb.torproject.org/obfsproxy.git
 
