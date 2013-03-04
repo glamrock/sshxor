@@ -9,11 +9,19 @@
 # ProxyCommand ~/sshxor.pl %h %p 
 # at the end of your .ssh/config (so you only use xorssh for that host)
 
-# for server end, put a line like 
+
+# on the server end, you can use inetd or xinetd
+
+
+# for inetd, on the server end, put a line like 
 # sshxor  stream  tcp     nowait  nobody  /usr/local/bin/sshxor.pl sshxor.pl 127.0.0.1 22
 # in your inetd.conf
 # and in your /etc/services put a line like
 # sshxor          13107/tcp
+
+
+# for xinetd.conf, look at the xinetd.conf.example file in this current
+# directory
 
 # then you just use ssh -p 13107 user@host and everything works ^_^
 
