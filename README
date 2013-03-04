@@ -1,8 +1,8 @@
 This is a simple ssh obfuscating proxy -- it xors every byte of SSH traffic 
 with 0x19. This is enough to defeat DPI systems that try to look at the SSH
-handshake / version string to identify SSH traffic. Unlike existing code that
-obfuscates SSH traffic, this doesn't require root access or patching the SSH 
-codebase.
+handshake / version string to identify SSH traffic. Unlike all the other code 
+i've seen that obfuscates SSH traffic, sshxor doesn't require root access or 
+patching the SSH codebase.
 
 The code in chunkssh.pl is not mine -- it's Brian Hatch's, and I used some of 
 their code to avoid reimplementing the annoying bits like forking and opening
@@ -10,7 +10,13 @@ sockets. See http://insecure.org/stc/sti.html for the original copy of
 chunkssh.pl (you need to search for "chunkssh.pl", it's about halfway through 
 the page).
 
-It's possible to use other DPI methods to block SSH traffic xored with 0x19 --
-the easiest way to do so is to look at packet sizes. If you want more advanced
-obfuscation, just use Tor's obfsproxy: https://gitweb.torproject.org/obfsproxy.git
+It's possible to use other DPI methods to block SSH traffic xored with 0x19.
+An easy way to do so is to look at packet sizes/timing or just to XOR some 
+bytes of traffic with each other (A xor B = (A xor key) xor (B xor key), so 
+the result of this calculation is not changed xoring each byte of traffic with
+a constant), and see if they match the xor'd together values of what the DPI 
+system is looking for.  
+    
+If you want more advanced obfuscation, use Tor's obfsproxy: 
+https://gitweb.torproject.org/obfsproxy.git
 
